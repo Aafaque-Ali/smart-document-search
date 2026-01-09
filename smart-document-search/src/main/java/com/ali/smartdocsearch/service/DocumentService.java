@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ali.smartdocsearch.entity.Document;
@@ -34,5 +36,11 @@ public class DocumentService {
 	public List<Document> searchDocuments(String keyword) {
 		logger.info("Searching documents with keyword: {}", keyword);
 		return repository.findByTitleContainingIgnoreCase(keyword);
+	}
+	
+	public Page<Document> getDocumentsPaginated(int page, int size) {
+		logger.info("Fetching documents page {} with size {}", page, size);
+		
+		return repository.findAll(PageRequest.of(page, size));
 	}
 }

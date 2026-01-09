@@ -2,6 +2,7 @@ package com.ali.smartdocsearch.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,5 +39,12 @@ public class DocumentController {
     public ResponseEntity<List<Document>> searchDocuments(@RequestParam String keyword) {
     	return ResponseEntity.ok(documentService.searchDocuments(keyword));
     	
+    }
+    
+    @GetMapping("/page")
+    public ResponseEntity<Page<Document>> getDocumentsPaginated(
+    		@RequestParam int page, 
+    		@RequestParam int size) {
+    	return ResponseEntity.ok(documentService.getDocumentsPaginated(page, size));
     }
 }

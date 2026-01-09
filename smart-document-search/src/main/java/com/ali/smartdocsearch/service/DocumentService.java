@@ -30,4 +30,9 @@ public class DocumentService {
 		logger.info("Fetching all documents");
 		return repository.findAll();
 	}
+	
+	public List<Document> searchDocuments(String keyword) {
+		logger.info("Searching documents with keyword: {}", keyword);
+		return repository.findByTitleContainingIgnoreCase(keyword);
+	}
 }
